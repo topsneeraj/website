@@ -1,9 +1,6 @@
 FROM ubuntu
 RUN apt-get update
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get install -y apache2
-RUN cd /home/ubuntu/jagentworkspace/workspace/Job1
-COPY .  /var/www/html 
-EXPOSE 80
-WORKDIR /usr/sbin
-CMD ["apachectl", "-D", "FOREGROUND"]
+RUN DEBIAN_FRONTEND="noninterative" apt-get -y install tzdata
+RUN apt-get -y install apache2
+ADD . /var/www/html
+ENTRYPOINT apachectl -D FOREGROUND
